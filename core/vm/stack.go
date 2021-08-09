@@ -29,3 +29,8 @@ func recycleStack(stack *Stack) {
 	stack.data = stack.data[:0] // Keep allocated array, but slice to zero length
 	pool.Put(stack)
 }
+
+// push adds as item at the top of the stack
+func (stack *Stack) push(entry uint256.Int) {
+	stack.data = append(stack.data, entry)
+}
