@@ -7,21 +7,18 @@ import (
 
 // Stack Each entry in a stack is an array of 4 64-bit integers
 type Stack struct {
-	data[] uint256.Int
+	data []uint256.Int
 }
 
+// stackPool a concurrent collection of a set of Stacks
+// Cache allocated but unused Stack objects for quick access
 var pool = sync.Pool{
 	New: func() interface{} {
 		// Stack capacity is 512 bytes = (16 * 256 bits / 8)
-		return &Stack{data: make([]uint256.Int,0,16)}
+		return &Stack{data: make([]uint256.Int, 0, 16)}
 	},
 }
 
-
-
 func create() *Stack {
-	return pool.Get().(*Stack);
+	return pool.Get().(*Stack)
 }
-
-
-
