@@ -26,11 +26,18 @@ func getStack() *Stack {
 
 // recycleStack clears stack contents then returns it to the stack pool
 func recycleStack(stack *Stack) {
-	stack.data = stack.data[:0] // Keep allocated array, but slice to zero length
+	stack.data = stack.data[:0] // Keep allocated array, but reset slice to zero length
 	pool.Put(stack)
 }
 
 // push adds as item at the top of the stack
 func (stack *Stack) push(entry uint256.Int) {
 	stack.data = append(stack.data, entry)
+}
+
+// pop retrieves and removes the item at the top of the stack
+func (stack *Stack) pop() (ret uint256.Int) {
+	ret = stack.data[len(stack.data)-1]
+	stack.data = stack.data[:len(stack.data)]
+
 }
