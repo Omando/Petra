@@ -5,7 +5,7 @@ import (
 	"sync"
 )
 
-// Stack Each entry in a stack is an array of 4 64-bit integers
+// Stack Each entry in a stack is a slice of 4 64-bit integers
 type Stack struct {
 	data []uint256.Int
 }
@@ -19,6 +19,13 @@ var pool = sync.Pool{
 	},
 }
 
-func create() *Stack {
+// getStack gets a stack from the stack pool
+func getStack() *Stack {
 	return pool.Get().(*Stack)
+}
+
+// recycleStack clears stack contents then returns it to the stack pool
+func recycleStack(stack *Stack) {
+	stack.data = stack.data[:0] // Keep allocated array, but slice to zero length
+	pool.Put(stack)
 }
