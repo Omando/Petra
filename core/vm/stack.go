@@ -17,6 +17,8 @@ var pool = sync.Pool{
 	},
 }
 
+
+
 func create() *Stack {
 	return pool.Get().(*Stack);
 }
