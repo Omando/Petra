@@ -39,5 +39,10 @@ func (stack *Stack) push(entry uint256.Int) {
 func (stack *Stack) pop() (ret uint256.Int) {
 	ret = stack.data[len(stack.data)-1]
 	stack.data = stack.data[:len(stack.data)]
+	return
+}
 
+// peek retrieves but does not remove the item at the top of the stack
+func (stack *Stack) peek() (ret uint256.Int) {
+	return stack.data[len(stack.data)-1]
 }
