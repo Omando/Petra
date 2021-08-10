@@ -46,3 +46,7 @@ func (stack *Stack) pop() (ret uint256.Int) {
 func (stack *Stack) peek() (ret uint256.Int) {
 	return stack.data[len(stack.data)-1]
 }
+
+func (stack *Stack) peekN(n int) (ret uint256.Int) {
+	return stack.data[len(stack.data)-1-n]
+}
