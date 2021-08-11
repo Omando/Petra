@@ -53,7 +53,7 @@ func (stack *Stack) peekN(n int) (ret uint256.Int) {
 }
 
 func (stack *Stack) print() {
-	fmt.Println("-------------Start stack dump-------------")
+	fmt.Println("------------- Start stack dump -------------")
 	if len(stack.data) == 0 {
 		fmt.Println("Stack is empty")
 	} else {
@@ -61,5 +61,5 @@ func (stack *Stack) print() {
 			fmt.Printf("%-5d %s\n", i, v)
 		}
 	}
-	fmt.Println("-------------End stack dump-------------")
+	fmt.Println("------------- End stack dump -------------")
 }
