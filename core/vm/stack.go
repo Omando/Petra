@@ -1,6 +1,7 @@
 package vm
 
 import (
+	"fmt"
 	"github.com/holiman/uint256"
 	"sync"
 )
@@ -49,4 +50,16 @@ func (stack *Stack) peek() (ret uint256.Int) {
 
 func (stack *Stack) peekN(n int) (ret uint256.Int) {
 	return stack.data[len(stack.data)-1-n]
+}
+
+func (stack *Stack) print() {
+	fmt.Println("-------------Start stack dump-------------")
+	if len(stack.data) == 0 {
+		fmt.Println("Stack is empty")
+	} else {
+		for i, v := range stack.data {
+			fmt.Printf("%-5d %s\n", i, v)
+		}
+	}
+	fmt.Println("-------------End stack dump-------------")
 }
