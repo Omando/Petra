@@ -31,21 +31,27 @@ func recycleStack(stack *Stack) {
 	pool.Put(stack)
 }
 
+func (stack *Stack) isEmpty() bool {
+	return len(stack.data) == 0
+}
+
 // push adds as item at the top of the stack
 func (stack *Stack) push(entry uint256.Int) {
 	stack.data = append(stack.data, entry)
 }
 
 // pop retrieves and removes the item at the top of the stack
-func (stack *Stack) pop() (ret uint256.Int) {
+func (stack *Stack) pop() (ret uint256.Int, err error) {
+
 	ret = stack.data[len(stack.data)-1]
 	stack.data = stack.data[:len(stack.data)]
-	return
+	return ret, nil
 }
 
 // peek retrieves but does not remove the item at the top of the stack
-func (stack *Stack) peek() (ret uint256.Int) {
-	return stack.data[len(stack.data)-1]
+func (stack *Stack) peek() (ret uint256.Int, err error) {
+
+	return stack.data[len(stack.data)-1], nil
 }
 
 func (stack *Stack) peekN(n int) (ret uint256.Int) {
