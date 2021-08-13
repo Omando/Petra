@@ -1,6 +1,7 @@
 package vm
 
 import (
+	"errors"
 	"fmt"
 	"github.com/holiman/uint256"
 	"sync"
@@ -50,6 +51,9 @@ func (stack *Stack) pop() (ret uint256.Int, err error) {
 
 // peek retrieves but does not remove the item at the top of the stack
 func (stack *Stack) peek() (ret uint256.Int, err error) {
+	if stack.isEmpty() {
+		return uint256.Int{}, errors.New("stack is empty")
+	}
 
 	return stack.data[len(stack.data)-1], nil
 }
