@@ -43,6 +43,9 @@ func (stack *Stack) push(entry uint256.Int) {
 
 // pop retrieves and removes the item at the top of the stack
 func (stack *Stack) pop() (ret uint256.Int, err error) {
+	if stack.isEmpty() {
+		return uint256.Int{}, errors.New("stack is empty")
+	}
 
 	ret = stack.data[len(stack.data)-1]
 	stack.data = stack.data[:len(stack.data)]
