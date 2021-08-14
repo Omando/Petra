@@ -61,8 +61,12 @@ func (stack *Stack) peek() (ret uint256.Int, err error) {
 	return stack.data[len(stack.data)-1], nil
 }
 
-func (stack *Stack) peekN(n int) (ret uint256.Int) {
-	return stack.data[len(stack.data)-1-n]
+func (stack *Stack) peekN(n int) (uint256.Int, error) {
+	if stack.isEmpty() {
+		return uint256.Int{}, errors.New("stack is empty")
+	}
+
+	return stack.data[len(stack.data)-1-n], nil
 }
 
 func (stack *Stack) print() {
