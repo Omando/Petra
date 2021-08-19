@@ -75,7 +75,7 @@ func (stack *Stack) print() {
 		fmt.Println("Stack is empty")
 	} else {
 		for i, v := range stack.data {
-			fmt.Printf("%-5d %s\n", i, v)
+			fmt.Printf("%-5d %s\n", i, v.String())
 		}
 	}
 	fmt.Println("------------- End stack dump -------------")
