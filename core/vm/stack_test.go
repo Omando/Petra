@@ -1,6 +1,7 @@
 package vm
 
 import (
+	"Petra/common"
 	"fmt"
 	"github.com/cucumber/godog"
 	"os"
@@ -26,7 +27,7 @@ func InitializeScenario(ctx *godog.ScenarioContext) {
 	ctx.Step(`^stack should be empty$`, stackShouldBeEmpty)
 }
 
-func TestMain(m *testing.M) {
+/*func TestMain(m *testing.M) {
 	opts := godog.Options{
 		Format: "progress",
 		Paths:  []string{"features"},
@@ -39,6 +40,18 @@ func TestMain(m *testing.M) {
 		ScenarioInitializer: InitializeScenario,
 		Options:             &opts,
 	}.Run()
+
+	// Optional: Run `testing` package's logic besides godog.
+	if st := m.Run(); st > status {
+		status = st
+	}
+
+	os.Exit(status)
+}*/
+
+func TestMain(m *testing.M) {
+	status := common.GetGodogTestSuite("features", "progress", "stack",
+		InitializeScenario, nil).Run()
 
 	// Optional: Run `testing` package's logic besides godog.
 	if st := m.Run(); st > status {
