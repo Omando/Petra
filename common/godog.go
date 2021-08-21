@@ -4,9 +4,9 @@ import (
 	"github.com/cucumber/godog"
 )
 
-func GetGodogTestSuite(path string, initScenario func(ctx *godog.ScenarioContext)) godog.TestSuite {
+func GetGodogTestSuite(path string, format string, initScenario func(ctx *godog.ScenarioContext)) godog.TestSuite {
 	opts := godog.Options{
-		Format: "progress",
+		Format: format,
 		Paths:  []string{path},
 		// Randomize: time.Now().UTC().UnixNano(), // randomize scenario execution order
 	}
