@@ -20,3 +20,7 @@ Feature: stack
       stack is empty
       """
 
+  Scenario: pop should match push
+    Given I push 5
+    When pop is called
+    Then popped value is 5
