@@ -36,6 +36,10 @@ func (stack *Stack) isEmpty() bool {
 	return len(stack.data) == 0
 }
 
+func (stack *Stack) size() int {
+	return len(stack.data)
+}
+
 // push adds as item at the top of the stack
 func (stack *Stack) push(entry uint256.Int) {
 	stack.data = append(stack.data, entry)
@@ -47,8 +51,10 @@ func (stack *Stack) pop() (ret uint256.Int, err error) {
 		return uint256.Int{}, errors.New("stack is empty")
 	}
 
-	ret = stack.data[len(stack.data)-1]
-	stack.data = stack.data[:len(stack.data)]
+	// Retrieve and remove item from the end of the slice
+	index := len(stack.data) - 1
+	ret = stack.data[index]
+	stack.data = stack.data[:index]
 	return ret, nil
 }
 
