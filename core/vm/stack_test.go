@@ -2,13 +2,18 @@ package vm
 
 import (
 	"Petra/common"
+	"errors"
 	"fmt"
 	"github.com/cucumber/godog"
+	"github.com/holiman/uint256"
 	"os"
+	"strings"
 	"testing"
 )
 
 var stack *Stack
+var data uint256.Int
+var err error
 
 func createStack() {
 	stack = getStack()
@@ -22,9 +27,32 @@ func stackShouldBeEmpty() error {
 	return nil
 }
 
+func anEmptyStack() {
+	stack = getStack()
+}
+
+func peekIsCalled() {
+	data, err = stack.peek()
+}
+
+func popIsCalled() {
+	data, err = stack.pop()
+}
+
+func errorShouldBe(expectedError *godog.DocString) error {
+	if !strings.EqualFold(expectedError.Content, err.Error()) {
+		return errors.New("unexpected error")
+	}
+	return nil
+}
+
 func InitializeScenario(ctx *godog.ScenarioContext) {
 	ctx.Step(`^a stack is created$`, createStack)
 	ctx.Step(`^stack should be empty$`, stackShouldBeEmpty)
+	ctx.Step(`^an empty stack$`, anEmptyStack)
+	ctx.Step(`^peek is called$`, peekIsCalled)
+	ctx.Step(`^pop is called$`, popIsCalled)
+	ctx.Step(`^error should be:$`, errorShouldBe)
 }
 
 func TestMain(m *testing.M) {
