@@ -20,9 +20,8 @@ func createStack() {
 }
 
 func stackShouldBeEmpty() error {
-	length := len(stack.data)
-	if length != 0 {
-		return fmt.Errorf("expected length 0, but found %d", length)
+	if stack.size() != 0 {
+		return fmt.Errorf("expected length 0, but found %d", stack.size())
 	}
 	return nil
 }
