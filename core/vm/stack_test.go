@@ -45,6 +45,22 @@ func errorShouldBe(expectedError *godog.DocString) error {
 	return nil
 }
 
+func isPushed(data sc
+return godog.ErrPending
+}
+
+func popIsCalledTimes(count int) error {
+	return godog.ErrPending
+}
+
+func poppedDataIs(data string) error {
+	return godog.ErrPending
+}
+
+func stackSizeIs(size int) error {
+	return godog.ErrPending
+}
+
 func InitializeScenario(ctx *godog.ScenarioContext) {
 	ctx.Step(`^a stack is created$`, createStack)
 	ctx.Step(`^stack should be empty$`, stackShouldBeEmpty)
@@ -52,6 +68,12 @@ func InitializeScenario(ctx *godog.ScenarioContext) {
 	ctx.Step(`^peek is called$`, peekIsCalled)
 	ctx.Step(`^pop is called$`, popIsCalled)
 	ctx.Step(`^error should be:$`, errorShouldBe)
+
+	//ctx.Step(`^error should be "([^"]*)"$`, errorShouldBe)
+	ctx.Step(`^"([^"]*)" is pushed$`, isPushed)
+	ctx.Step(`^pop is called "([^"]*)" times$`, popIsCalledTimes)
+	ctx.Step(`^popped data is "([^"]*)"$`, poppedDataIs)
+	ctx.Step(`^stack size is "([^"]*)"$`, stackSizeIs)
 }
 
 func TestMain(m *testing.M) {
