@@ -45,8 +45,8 @@ func errorShouldBe(expectedError *godog.DocString) error {
 	return nil
 }
 
-func isPushed(data sc
-return godog.ErrPending
+func isPushed(data string) error {
+	return godog.ErrPending
 }
 
 func popIsCalledTimes(count int) error {
