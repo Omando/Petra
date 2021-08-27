@@ -7,6 +7,7 @@ import (
 	"github.com/cucumber/godog"
 	"github.com/holiman/uint256"
 	"os"
+	"strconv"
 	"strings"
 	"testing"
 )
@@ -46,7 +47,17 @@ func errorShouldBe(expectedError *godog.DocString) error {
 }
 
 func isPushed(data string) error {
-	return godog.ErrPending
+	// Convert to numbers
+	var items = strings.Split(data, ",")
+	for _, item := range items {
+		if value, err := strconv.Atoi(item); err == nil {
+			var v = [4]uint64{uint64(value)}
+			stack.push(v)
+		} else {
+			return err
+		}
+	}
+	return nil
 }
 
 func popIsCalledTimes(count int) error {
