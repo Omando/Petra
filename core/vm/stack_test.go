@@ -51,7 +51,7 @@ func isPushed(data string) error {
 	var items = strings.Split(data, ",")
 	for _, item := range items {
 		if value, err := strconv.Atoi(item); err == nil {
-			var v = [4]uint64{uint64(value)}
+			var v = [4]uint64{uint64(value)} // lower 64-bit number only at index 0
 			stack.push(v)
 		} else {
 			return err
