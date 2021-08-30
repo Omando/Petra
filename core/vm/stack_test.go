@@ -60,7 +60,15 @@ func popIsCalledTimes(count int) error {
 }
 
 func poppedDataIs(data string) error {
+	expectedItems := strings.Split(data, ",")
 
+	// Check lengths are same
+	if len(expectedItems) != len(popped) {
+		return fmt.Errorf("expected %d popped items, but actual is %d popped items",
+			len(expectedItems), len(popped))
+	}
+
+	return nil
 }
 
 func stackSizeIs(expectedSize int) error {
