@@ -2,6 +2,7 @@ package vm
 
 import (
 	"Petra/common"
+	"encoding/hex"
 	"errors"
 	"fmt"
 	"github.com/cucumber/godog"
@@ -66,6 +67,15 @@ func poppedDataIs(data string) error {
 	if len(expectedItems) != len(popped) {
 		return fmt.Errorf("expected %d popped items, but actual is %d popped items",
 			len(expectedItems), len(popped))
+	}
+
+	// Check values are the same
+	for i, actual := range popped {
+		bytes, _ := hex.DecodeString(expectedItems[i])
+		expected := (&uint256.Int{}).SetBytes(bytes)
+		if actual.Cmp(expected) != 0 {
+			return fmt.Errorf("Testcase %d, expected  %x, got %x", i, expected, actual)
+		}
 	}
 
 	return nil
