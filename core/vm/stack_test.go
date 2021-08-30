@@ -7,17 +7,18 @@ import (
 	"github.com/cucumber/godog"
 	"github.com/holiman/uint256"
 	"os"
-	"strconv"
 	"strings"
 	"testing"
 )
 
 var stack *Stack
-var data uint256.Int
-var err error
+var stackError error
+var popped []uint256.Int
 
 func createStack() {
 	stack = getStack()
+	stackError = nil
+	popped = nil
 }
 
 func stackShouldBeEmpty() error {
@@ -28,48 +29,41 @@ func stackShouldBeEmpty() error {
 }
 
 func anEmptyStack() {
-	stack = getStack()
+	createStack()
 }
 
 func peekIsCalled() {
-	data, err = stack.peek()
+	_, stackError = stack.peek()
 }
 
 func popIsCalled() {
-	data, err = stack.pop()
+	_, stackError = stack.pop()
 }
 
 func errorShouldBe(expectedError *godog.DocString) error {
-	if !strings.EqualFold(expectedError.Content, err.Error()) {
+	if !strings.EqualFold(expectedError.Content, stackError.Error()) {
 		return errors.New("unexpected error")
 	}
 	return nil
 }
 
+func StackErrorShouldBe(expectedError string) error {
+
+}
+
 func isPushed(data string) error {
-	// Convert to numbers
-	var items = strings.Split(data, ",")
-	for _, item := range items {
-		if value, err := strconv.Atoi(item); err == nil {
-			var v = [4]uint64{uint64(value)} // lower 64-bit number only at index 0
-			stack.push(v)
-		} else {
-			return err
-		}
-	}
-	return nil
+
 }
 
 func popIsCalledTimes(count int) error {
-	return godog.ErrPending
+
 }
 
 func poppedDataIs(data string) error {
-	return godog.ErrPending
+
 }
 
-func stackSizeIs(size int) error {
-	return godog.ErrPending
+func stackSizeIs(expectedSize int) error {
 }
 
 func InitializeScenario(ctx *godog.ScenarioContext) {
@@ -80,7 +74,7 @@ func InitializeScenario(ctx *godog.ScenarioContext) {
 	ctx.Step(`^pop is called$`, popIsCalled)
 	ctx.Step(`^error should be:$`, errorShouldBe)
 
-	//ctx.Step(`^error should be "([^"]*)"$`, errorShouldBe)
+	ctx.Step(`^error should be "([^"]*)"$`, StackErrorShouldBe)
 	ctx.Step(`^"([^"]*)" is pushed$`, isPushed)
 	ctx.Step(`^pop is called "([^"]*)" times$`, popIsCalledTimes)
 	ctx.Step(`^popped data is "([^"]*)"$`, poppedDataIs)
