@@ -64,6 +64,11 @@ func poppedDataIs(data string) error {
 }
 
 func stackSizeIs(expectedSize int) error {
+	actualSize := len(stack.data)
+	if expectedSize == actualSize {
+		return nil
+	}
+	return fmt.Errorf("Expected size is %d, but actual is %d", expectedSize, actualSize)
 }
 
 func InitializeScenario(ctx *godog.ScenarioContext) {
