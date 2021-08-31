@@ -54,6 +54,18 @@ func StackErrorShouldBe(expectedError string) error {
 
 func isPushed(data string) error {
 	// Convert to numbers
+	var items = strings.Split(data, ",")
+	for _, item := range items {
+		if bytes, err := hex.DecodeString(item); err == nil {
+			// Can replace below with: stack.push(*(&uint256.Int{}).SetBytes(bytes))
+			value := uint256.Int{}
+			value.SetBytes(bytes)
+			stack.push(value)
+		} else {
+			return err
+		}
+	}
+	return nil
 
 	/*// Convert to numbers
 	var items = strings.Split(data, ",")
