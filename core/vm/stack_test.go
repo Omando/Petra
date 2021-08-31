@@ -49,7 +49,13 @@ func errorShouldBe(expectedError *godog.DocString) error {
 }
 
 func StackErrorShouldBe(expectedError string) error {
-
+	expectedError = strings.TrimSpace(expectedError)
+	if expectedError != "" &&
+		stackError != nil &&
+		!strings.EqualFold(expectedError, stackError.Error()) {
+		return fmt.Errorf("Expected error: '%s', but got '%s'", expectedError, stackError)
+	}
+	return nil
 }
 
 func isPushed(data string) error {
