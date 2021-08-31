@@ -57,7 +57,13 @@ func isPushed(data string) error {
 }
 
 func popIsCalledTimes(count int) error {
-
+	for i := 0; i < count; i++ {
+		var value uint256.Int
+		if value, stackError = stack.pop(); stackError == nil {
+			popped = append(popped, value)
+		}
+	}
+	return nil
 }
 
 func poppedDataIs(data string) error {
