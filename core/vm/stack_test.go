@@ -53,7 +53,19 @@ func StackErrorShouldBe(expectedError string) error {
 }
 
 func isPushed(data string) error {
+	// Convert to numbers
 
+	/*// Convert to numbers
+	var items = strings.Split(data, ",")
+	for _, item := range items {
+		if value, stackError := strconv.Atoi(item); stackError == nil {
+			var v = [4]uint64{uint64(value)} // lower 64-bit number only at index 0
+			stack.push(v)
+		} else {
+			return stackError
+		}
+	}
+	return nil*/
 }
 
 func popIsCalledTimes(count int) error {
