@@ -53,7 +53,7 @@ func StackErrorShouldBe(expectedError string) error {
 	if expectedError != "" &&
 		stackError != nil &&
 		!strings.EqualFold(expectedError, stackError.Error()) {
-		return fmt.Errorf("Expected error: '%s', but got '%s'", expectedError, stackError)
+		return fmt.Errorf("expected error: '%s', but got '%s'", expectedError, stackError)
 	}
 	return nil
 }
@@ -110,7 +110,7 @@ func stackSizeIs(expectedSize int) error {
 	if expectedSize == actualSize {
 		return nil
 	}
-	return fmt.Errorf("Expected size is %d, but actual is %d", expectedSize, actualSize)
+	return fmt.Errorf("expected size is %d, but actual is %d", expectedSize, actualSize)
 }
 
 func InitializeScenario(ctx *godog.ScenarioContext) {
