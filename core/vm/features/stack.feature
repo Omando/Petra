@@ -21,11 +21,12 @@ Feature: stack
       """
 
   Scenario Outline: pushes and pops
-    Given "<Data>" is pushed
+    Given a stack is created
+    And "<Data>" is pushed
     When pop is called "<NumberOfPops>" times
     Then popped data is "<PopData>"
     And stack size is "<Size>"
-    And error should be "<Error>"
+    And error should be "<StackError>"
     Examples:
-      | Data      | NumberOfPops | PopData | Size | Error|
-      | 1,2,3     | 2            | 3,2     | 1    | nil  |
+      | Data       | NumberOfPops | PopData    | Size | StackError     |
+      | A0,B0,C0   | 2            | C0,B0      | 1    |                |
