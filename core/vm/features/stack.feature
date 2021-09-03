@@ -30,3 +30,4 @@ Feature: stack
     Examples:
       | Data       | NumberOfPops | PopData    | Size | StackError     |
       | A0,B0,C0   | 2            | C0,B0      | 1    |                |
+      | A1,B1,C1   | 3            | C1,B1,A1   | 0    |                |
