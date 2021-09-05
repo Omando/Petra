@@ -32,3 +32,4 @@ Feature: stack
       | A0,B0,C0   | 2            | C0,B0      | 1    |                |
       | A1,B1,C1   | 3            | C1,B1,A1   | 0    |                |
       | A2,B2,C2   | 4            | C2,B2,A2   | 0    | stack is empty |
+      | A0,A1,A2,A3,A4,A5,A6,A7,A8,A9,AA,AB,AC,AD,AE,AF,B0,B1| 0| | 18 | |
