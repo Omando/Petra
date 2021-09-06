@@ -62,7 +62,7 @@ func isPushed(data string) error {
 	// Convert to numbers
 	var items = strings.Split(data, ",")
 	for _, item := range items {
-		if bytes, err := hex.DecodeString(item); err == nil {
+		if bytes, err := hex.DecodeString(strings.TrimSpace(item)); err == nil {
 			// Can replace below with: stack.push(*(&uint256.Int{}).SetBytes(bytes))
 			value := uint256.Int{}
 			value.SetBytes(bytes)
