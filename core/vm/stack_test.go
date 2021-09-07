@@ -87,13 +87,16 @@ func popIsCalledTimes(count int) error {
 func poppedDataIs(data string) error {
 	expectedItems := strings.Split(data, ",")
 
-	// Check lengths are same
+	// Handle case when no items are popped
+	// todo
+
+	// Items popped: check lengths are same
 	if len(expectedItems) != len(popped) {
 		return fmt.Errorf("expected %d popped items, but actual is %d popped items",
 			len(expectedItems), len(popped))
 	}
 
-	// Check values are the same
+	// Items popped: check values are the same
 	for i, actual := range popped {
 		bytes, _ := hex.DecodeString(expectedItems[i])
 		expected := (&uint256.Int{}).SetBytes(bytes)
