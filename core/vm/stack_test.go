@@ -85,12 +85,13 @@ func popIsCalledTimes(count int) error {
 }
 
 func poppedDataIs(data string) error {
-	expectedItems := strings.Split(data, ",")
-
 	// Handle case when no items are popped
-	// todo
+	if data == "" && popped == nil {
+		return nil
+	}
 
 	// Items popped: check lengths are same
+	expectedItems := strings.Split(data, ",")
 	if len(expectedItems) != len(popped) {
 		return fmt.Errorf("expected %d popped items, but actual is %d popped items",
 			len(expectedItems), len(popped))
