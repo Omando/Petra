@@ -49,6 +49,10 @@ func errorShouldBe(expectedError *godog.DocString) error {
 }
 
 func isPushed(data string) error {
+	if data == "" {
+		return nil
+	}
+
 	// Convert to numbers
 	var items = strings.Split(data, ",")
 	for _, item := range items {
@@ -109,9 +113,10 @@ func stackSizeIs(expectedSize int) error {
 
 func StackErrorShouldBe(expectedError string) error {
 	expectedError = strings.TrimSpace(expectedError)
-	if expectedError != "" &&
-		stackError != nil &&
-		!strings.EqualFold(expectedError, stackError.Error()) {
+	
+	if (expectedError != "" && stackError == nil) ||
+		(expectedError == "" && stackError != nil) ||
+		(expectedError != "" && stackError != nil && !strings.EqualFold(expectedError, stackError.Error())) {
 		return fmt.Errorf("expected error: '%s', but got '%s'", expectedError, stackError)
 	}
 	return nil
