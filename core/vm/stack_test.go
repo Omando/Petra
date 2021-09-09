@@ -48,16 +48,6 @@ func errorShouldBe(expectedError *godog.DocString) error {
 	return nil
 }
 
-func StackErrorShouldBe(expectedError string) error {
-	expectedError = strings.TrimSpace(expectedError)
-	if expectedError != "" &&
-		stackError != nil &&
-		!strings.EqualFold(expectedError, stackError.Error()) {
-		return fmt.Errorf("expected error: '%s', but got '%s'", expectedError, stackError)
-	}
-	return nil
-}
-
 func isPushed(data string) error {
 	// Convert to numbers
 	var items = strings.Split(data, ",")
@@ -115,6 +105,16 @@ func stackSizeIs(expectedSize int) error {
 		return nil
 	}
 	return fmt.Errorf("expected size is %d, but actual is %d", expectedSize, actualSize)
+}
+
+func StackErrorShouldBe(expectedError string) error {
+	expectedError = strings.TrimSpace(expectedError)
+	if expectedError != "" &&
+		stackError != nil &&
+		!strings.EqualFold(expectedError, stackError.Error()) {
+		return fmt.Errorf("expected error: '%s', but got '%s'", expectedError, stackError)
+	}
+	return nil
 }
 
 func InitializeScenario(ctx *godog.ScenarioContext) {
