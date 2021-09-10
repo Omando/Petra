@@ -1,15 +1,12 @@
 package vm
 
 import (
-	"Petra/common"
 	"encoding/hex"
 	"errors"
 	"fmt"
 	"github.com/cucumber/godog"
 	"github.com/holiman/uint256"
-	"os"
 	"strings"
-	"testing"
 )
 
 var stack *Stack
@@ -113,7 +110,7 @@ func stackSizeIs(expectedSize int) error {
 
 func StackErrorShouldBe(expectedError string) error {
 	expectedError = strings.TrimSpace(expectedError)
-	
+
 	if (expectedError != "" && stackError == nil) ||
 		(expectedError == "" && stackError != nil) ||
 		(expectedError != "" && stackError != nil && !strings.EqualFold(expectedError, stackError.Error())) {
@@ -122,7 +119,7 @@ func StackErrorShouldBe(expectedError string) error {
 	return nil
 }
 
-func InitializeScenario(ctx *godog.ScenarioContext) {
+func InitializeStackScenario(ctx *godog.ScenarioContext) {
 	ctx.Step(`^a stack is created$`, createStack)
 	ctx.Step(`^stack should be empty$`, stackShouldBeEmpty)
 	ctx.Step(`^an empty stack$`, anEmptyStack)
@@ -137,6 +134,7 @@ func InitializeScenario(ctx *godog.ScenarioContext) {
 	ctx.Step(`^stack size is "([^"]*)"$`, stackSizeIs)
 }
 
+/* Only one TestMain per pacakge. Disabled for now
 func TestMain(m *testing.M) {
 	status := common.GetGodogTestSuite("features", "progress", "stack",
 		InitializeScenario, nil).Run()
@@ -147,4 +145,4 @@ func TestMain(m *testing.M) {
 	}
 
 	os.Exit(status)
-}
+} */
