@@ -43,3 +43,18 @@ func (m *Memory) GetCopy(offset, size uint) (dataCopy []byte, err error) {
 	copy(dataCopy, m.data[offset:offset+size])
 	return dataCopy, nil
 }
+
+// GetPtr returns the offset + size
+func (m *Memory) GetPtr(offset, size uint) ([]byte, error) {
+	// Check inputs
+	if size == 0 {
+		return nil, &MemorySizeError{"size is zero"}
+	}
+
+	if int(offset+size) > len(m.data) {
+		return nil, &MemoryOffsetError{size, offset, len(m.data)}
+	}
+
+	// Return data starting at the given offset
+	return m.data[offset : offset+size], nil
+}
