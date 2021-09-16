@@ -58,3 +58,19 @@ func (m *Memory) GetPtr(offset, size uint) ([]byte, error) {
 	// Return data starting at the given offset
 	return m.data[offset : offset+size], nil
 }
+
+// Set sets offset + size to value
+func (m *Memory) Set(offset, size uint64, value []byte) error {
+	// Check inputs
+	if size == 0 {
+		return &MemorySizeError{"size is zero"}
+	}
+
+	// Length of store must be at least offset+size
+	if int(offset+size) > len(m.data) {
+		return &MemoryOffsetError{uint(size), uint(offset), len(m.data)}
+	}
+
+	copy(m.data[offset:offset+size], value)
+	return nil
+}
