@@ -1,5 +1,9 @@
 package vm
 
+import (
+	"github.com/holiman/uint256"
+)
+
 type Memory struct {
 	data        []byte
 	lastGasCost uint64
@@ -72,5 +76,17 @@ func (m *Memory) Set(offset, size uint64, value []byte) error {
 	}
 
 	copy(m.data[offset:offset+size], value)
+	return nil
+}
+
+// Set32 sets the 32 bytes starting at offset to the value of val,
+// left-padded with zeroes to 32 bytes
+func (m *Memory) Set32(offset uint64, val *uint256.Int) error {
+	// Length of store must be at least offset+size
+	if int(offset+32) > len(m.data) {
+		return &MemoryOffsetError{32, uint(offset), len(m.data)}
+	}
+
+	copy(m.data[offset:offset+32], []byte{0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0})
 	return nil
 }
