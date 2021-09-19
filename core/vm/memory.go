@@ -1,6 +1,7 @@
 package vm
 
 import (
+	"fmt"
 	"github.com/holiman/uint256"
 )
 
@@ -89,4 +90,18 @@ func (m *Memory) Set32(offset uint64, val *uint256.Int) error {
 
 	copy(m.data[offset:offset+32], []byte{0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0})
 	return nil
+}
+
+// Dump dumps the content of Memory
+func (m *Memory) Dump() {
+	fmt.Printf("### Total %d bytes in memory ###\n", len(m.data))
+	if len(m.data) > 0 {
+		address := 0
+		for i := 0; i+32 <= len(m.data); i += 32 {
+			fmt.Printf("%04d: %x\n", address, m.data[i:i+32])
+			address++
+		}
+	}
+
+	fmt.Println("###")
 }
