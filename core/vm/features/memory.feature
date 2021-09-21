@@ -12,3 +12,6 @@ Feature: memory
     Examples:
     |oldSize|newSize|updatedSize|
     | 10    | 20    | 20    |
+    | 10    | 10    | 10    |
+    | 10    | 5     | 10    |
+
