@@ -15,3 +15,12 @@ Feature: memory
     | 10    | 10    | 10    |
     | 10    | 5     | 10    |
 
+    Scenario Outline: Get copy
+      Given a memory is created and initialized with "<data>"
+      When getting a copy at offset "<>" and size "<>"
+      Then data should be "<copieddata>"
+      And error is "<error>"
+      And data is a copy
+      Examples:
+      |data                 |offset|size|copieddata          |error                                 |
+      |A0A1A2A3A4A5A6A7A8A9 |2     |0   |                    |size is zero                          |
