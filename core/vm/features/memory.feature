@@ -28,3 +28,12 @@ Feature: memory
       |A0A1A2A3A4A5A6A7A8A9 |2     |3   |A2A3A4              |                                      |
       |A0A1A2A3A4A5A6A7A8A9 |0     |10  |A0A1A2A3A4A5A6A7A8A9|                                      |
 
+  Scenario Outline: Get ptr to data of a given size starting from a given offset
+    Given a memory is created and initialized with "<data>"
+    When getting a ptr at offset "<>" and size "<>"
+    Then data should be "<copieddata>"
+    And error is "<error>"
+    And data is not a copy
+    Examples:
+      |data                 |offset|size|copieddata          |error                                 |
+      |A0A1A2A3A4A5A6A7A8A9 |2     |0   |                    |size is zero                          |
