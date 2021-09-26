@@ -39,3 +39,5 @@ Feature: memory
       |A0A1A2A3A4A5A6A7A8A9 |2     |0   |                    |size is zero                          |
       |A0A1A2A3A4A5A6A7A8A9 |20    |3   |A2A3A4              |offset 20 + size 3 is > data length 10|
       |A0A1A2A3A4A5A6A7A8A9 |2     |3   |A2A3A4              |                                      |
+      |A0A1A2A3A4A5A6A7A8A9 |0     |10  |A0A1A2A3A4A5A6A7A8A9|                                      |
+
