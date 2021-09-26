@@ -41,3 +41,10 @@ Feature: memory
       |A0A1A2A3A4A5A6A7A8A9 |2     |3   |A2A3A4              |                                      |
       |A0A1A2A3A4A5A6A7A8A9 |0     |10  |A0A1A2A3A4A5A6A7A8A9|                                      |
 
+  Scenario Outline: Populate memory with data of a given size starting at a given offset
+    Given a memory is created and initialized with "<data>"
+    Then data should be "<newdata>"
+    And error is "<error>"
+    Examples:
+      |data         |offset|size|value   |newdata                     |error                                 |
+
