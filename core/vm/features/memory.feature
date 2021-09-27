@@ -47,4 +47,5 @@ Feature: memory
     And error is "<error>"
     Examples:
       |data         |offset|size|value   |newdata                     |error                                 |
+      |A0A1A2A3A4A5 |2     |  0 |        |                            |size is zero                          |
 
