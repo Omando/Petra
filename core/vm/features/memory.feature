@@ -49,4 +49,5 @@ Feature: memory
       |data         |offset|size|value   |newdata                     |error                                 |
       |A0A1A2A3A4A5 |2     |  0 |        |                            |size is zero                          |
       |A0A1A2A3A4A5 |20    |  10|        |                            |offset 20 + size 30 is > data length 5|
+      |A0A1A2A3A4A5 |2     |  2 |B1B2    |A0A1B1B2A2A3A4A5            |                                      |
 
