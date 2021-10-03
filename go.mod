@@ -5,6 +5,7 @@ go 1.17
 require (
 	github.com/cucumber/godog v0.12.2
 	github.com/holiman/uint256 v1.2.0
+	github.com/smartystreets/assertions v0.0.0-20180927180507-b2de0cb4f26d
 )
 
 require (
