@@ -1,12 +1,14 @@
 package vm
 
 import (
+	"Petra/common"
 	"encoding/hex"
 	"errors"
 	"fmt"
 	"github.com/cucumber/godog"
 	"github.com/holiman/uint256"
 	"strings"
+	"testing"
 )
 
 var stack *Stack
@@ -134,15 +136,11 @@ func InitializeStackScenario(ctx *godog.ScenarioContext) {
 	ctx.Step(`^stack size is "([^"]*)"$`, stackSizeIs)
 }
 
-/* Only one TestMain per pacakge. Disabled for now
-func TestMain(m *testing.M) {
-	status := common.GetGodogTestSuite("features", "progress", "stack",
-		InitializeScenario, nil).Run()
+func TestStack(t *testing.T) {
+	suite := common.GetGodogTestSuite("features", "progress", "stack",
+		InitializeStackScenario, nil)
 
-	// Optional: Run `testing` package's logic besides godog.
-	if st := m.Run(); st > status {
-		status = st
+	if suite.Run() != 0 {
+		t.Fatal("Failed to run memory feature test")
 	}
-
-	os.Exit(status)
-} */
+}
