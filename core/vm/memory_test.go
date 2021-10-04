@@ -6,6 +6,12 @@ import (
 	"testing"
 )
 
+var memory *Memory
+
+func aNewMemoryStoreIsCreated() {
+	memory = NewMemory()
+}
+
 func aMemoryIsCreatedAndInitializedWith(arg1 string) error {
 	return godog.ErrPending
 }
