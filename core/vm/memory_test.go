@@ -1,14 +1,12 @@
 package vm
 
 import (
+	"Petra/common"
 	"github.com/cucumber/godog"
+	"testing"
 )
 
 func aMemoryIsCreatedAndInitializedWith(arg1 string) error {
-	return godog.ErrPending
-}
-
-func aNewMemoryStoreIsCreated() error {
 	return godog.ErrPending
 }
 
@@ -36,23 +34,7 @@ func gettingAPtrAtOffsetAndSize(arg1, arg2 string) error {
 	return godog.ErrPending
 }
 
-func resizedTo(arg1 string) error {
-	return godog.ErrPending
-}
-
 func settingStartingAtAndSize(arg1, arg2, arg3 string) error {
-	return godog.ErrPending
-}
-
-func sizeIs(arg1 string) error {
-	return godog.ErrPending
-}
-
-func storeIsEmpty() error {
-	return godog.ErrPending
-}
-
-func updatedSizeIs(arg1 string) error {
 	return godog.ErrPending
 }
 
@@ -70,4 +52,13 @@ func InitializeMemoryScenario(ctx *godog.ScenarioContext) {
 	ctx.Step(`^size is "([^"]*)"$`, sizeIs)
 	ctx.Step(`^store is empty$`, storeIsEmpty)
 	ctx.Step(`^updated size is "([^"]*)"$`, updatedSizeIs)
+}
+
+func TestMemory(t *testing.T) {
+	suite := common.GetGodogTestSuite("features", "progress", "memory",
+		InitializeMemoryScenario, nil)
+
+	if suite.Run() != 0 {
+		t.Fatal("Failed to run memory feature test")
+	}
 }
