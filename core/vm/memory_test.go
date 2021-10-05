@@ -2,7 +2,9 @@ package vm
 
 import (
 	"Petra/common"
+	"errors"
 	"github.com/cucumber/godog"
+	"github.com/smartystreets/assertions"
 	"testing"
 )
 
@@ -10,6 +12,14 @@ var memory *Memory
 
 func aNewMemoryStoreIsCreated() {
 	memory = NewMemory()
+}
+
+func storeIsEmpty() error {
+	var result = assertions.ShouldBeZeroValue(len(memory.data))
+	if result != "" {
+		return errors.New(result)
+	}
+	return nil
 }
 
 func aMemoryIsCreatedAndInitializedWith(arg1 string) error {
