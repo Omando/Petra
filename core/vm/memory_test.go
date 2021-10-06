@@ -22,6 +22,15 @@ func storeIsEmpty() error {
 	return nil
 }
 
+func sizeIs(oldSize int) error {
+	dummyData := make([]byte, oldSize)
+	for i := 0; i < oldSize; i++ {
+		dummyData[i] = byte(i)
+	}
+	err := memory.Set(0, 10, dummyData)
+	return err
+}
+
 func aMemoryIsCreatedAndInitializedWith(arg1 string) error {
 	return godog.ErrPending
 }
