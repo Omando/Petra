@@ -31,6 +31,10 @@ func sizeIs(oldSize int) error {
 	return err
 }
 
+func resizedTo(newSize int) {
+	memory.ResizeIfLessThan(newSize)
+}
+
 func aMemoryIsCreatedAndInitializedWith(arg1 string) error {
 	return godog.ErrPending
 }
