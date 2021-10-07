@@ -35,6 +35,14 @@ func resizedTo(newSize int) {
 	memory.ResizeIfLessThan(newSize)
 }
 
+func updatedSizeIs(expectedSize int) error {
+	var result string = assertions.ShouldBeBetweenOrEqual(len(memory.data), expectedSize)
+	if result != "" {
+		return errors.New(result)
+	}
+	return nil
+}
+
 func aMemoryIsCreatedAndInitializedWith(arg1 string) error {
 	return godog.ErrPending
 }
