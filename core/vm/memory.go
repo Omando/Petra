@@ -23,6 +23,11 @@ func (m *Memory) Length() int {
 	return len(m.data)
 }
 
+// Data returns the underlying slice
+func (m *Memory) Data() []byte {
+	return m.data
+}
+
 // ResizeIfLessThan increases the Memory to newSize if current size is less than the new size
 func (m *Memory) ResizeIfLessThan(newSize int) {
 	if len(m.data) < newSize {
