@@ -30,7 +30,7 @@ Feature: memory
 
   Scenario Outline: Get ptr to data of a given size starting from a given offset
     Given a memory is created and initialized with "<data>"
-    When getting a ptr at offset "<>" and size "<>"
+    When getting a ptr at offset "<offset>" and size "<size>"
     Then data should be "<copieddata>"
     And error is "<error>"
     And data is not a copy
