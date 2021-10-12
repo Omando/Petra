@@ -17,7 +17,7 @@ Feature: memory
 
     Scenario Outline: Get copy
       Given a memory is created and initialized with "<data>"
-      When getting a copy at offset "<>" and size "<>"
+      When getting a copy at offset "<offset>" and size "<size>"
       Then data should be "<copieddata>"
       And error is "<error>"
       And data is a copy
