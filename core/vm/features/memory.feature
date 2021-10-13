@@ -16,7 +16,8 @@ Feature: memory
     | 10    | 5     | 10    |
 
     Scenario Outline: Get copy
-      Given a memory is created and initialized with "<data>"
+      Given a new memory store is created
+      And store is initialized with "<data>"
       When getting a copy at offset "<offset>" and size "<size>"
       Then data should be "<copieddata>"
       And error is "<error>"
@@ -29,7 +30,8 @@ Feature: memory
       |A0A1A2A3A4A5A6A7A8A9 |0     |10  |A0A1A2A3A4A5A6A7A8A9|                  |
 
   Scenario Outline: Get ptr to data of a given size starting from a given offset
-    Given a memory is created and initialized with "<data>"
+    Given a new memory store is created
+    And store is initialized with "<data>"
     When getting a ptr at offset "<offset>" and size "<size>"
     Then data should be "<copieddata>"
     And error is "<error>"
