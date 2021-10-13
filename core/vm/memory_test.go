@@ -38,11 +38,16 @@ func updatedSizeIs(expectedSize int) error {
 	return nil
 }
 
+func storeIsInitializedWith(arg1 string) error {
+	return godog.ErrPending
+}
+
 func aMemoryIsCreatedAndInitializedWith(data string) error {
 	/*dummyData := make([]byte, oldSize)
 	for i := 0; i < oldSize; i++ {
 		dummyData[i] = byte(i)
 	}*/
+	return nil
 }
 
 func dataIsACopy() error {
@@ -87,6 +92,8 @@ func InitializeMemoryScenario(ctx *godog.ScenarioContext) {
 	ctx.Step(`^size is "([^"]*)"$`, sizeIs)
 	ctx.Step(`^store is empty$`, storeIsEmpty)
 	ctx.Step(`^updated size is "([^"]*)"$`, updatedSizeIs)
+	ctx.Step(`^store is initialized with "([^"]*)"$`, storeIsInitializedWith)
+
 }
 
 func TestMemory(t *testing.T) {
