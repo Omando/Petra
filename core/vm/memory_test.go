@@ -38,8 +38,11 @@ func updatedSizeIs(expectedSize int) error {
 	return nil
 }
 
-func aMemoryIsCreatedAndInitializedWith(arg1 string) error {
-	return godog.ErrPending
+func aMemoryIsCreatedAndInitializedWith(data string) error {
+	/*dummyData := make([]byte, oldSize)
+	for i := 0; i < oldSize; i++ {
+		dummyData[i] = byte(i)
+	}*/
 }
 
 func dataIsACopy() error {
