@@ -71,7 +71,6 @@ func settingStartingAtAndSize(arg1, arg2, arg3 string) error {
 }
 
 func InitializeMemoryScenario(ctx *godog.ScenarioContext) {
-	ctx.Step(`^a memory is created and initialized with "([^"]*)"$`, aMemoryIsCreatedAndInitializedWith)
 	ctx.Step(`^a new memory store is created$`, aNewMemoryStoreIsCreated)
 	ctx.Step(`^data is a copy$`, dataIsACopy)
 	ctx.Step(`^data is not a copy$`, dataIsNotACopy)
