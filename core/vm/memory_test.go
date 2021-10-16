@@ -31,14 +31,14 @@ func resizedTo(newSize int) {
 }
 
 func updatedSizeIs(expectedSize int) error {
-	var result string = assertions.ShouldBeBetweenOrEqual(len(memory.data), expectedSize)
+	var result string = assertions.ShouldEqual(len(memory.data), expectedSize)
 	if result != "" {
 		return errors.New(result)
 	}
 	return nil
 }
 
-func storeIsInitializedWith(arg1 string) error {
+func storeIsInitializedWith(data string) error {
 	return godog.ErrPending
 }
 
