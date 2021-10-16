@@ -38,7 +38,7 @@ func updatedSizeIs(expectedSize int) error {
 	return nil
 }
 
-func storeIsInitializedWith(data string) error {
+func storeIsInitializedWith(data []byte) error {
 	return godog.ErrPending
 }
 
