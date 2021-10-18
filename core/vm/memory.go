@@ -36,6 +36,34 @@ func (m *Memory) ResizeIfLessThan(newSize int) {
 	}
 }
 
+// Set sets offset + size to value
+func (m *Memory) Set(offset, size uint64, value []byte) error {
+	// Check inputs
+	if size == 0 {
+		return &MemorySizeError{"size is zero"}
+	}
+
+	// Length of store must be at least offset+size
+	if int(offset+size) > len(m.data) {
+		return &MemoryOffsetError{uint(size), uint(offset), len(m.data)}
+	}
+
+	copy(m.data[offset:offset+size], value)
+	return nil
+}
+
+// Set32 sets the 32 bytes starting at offset to the value of val,
+// left-padded with zeroes to 32 bytes
+func (m *Memory) Set32(offset uint64, val *uint256.Int) error {
+	// Length of store must be at least offset+size
+	if int(offset+32) > len(m.data) {
+		return &MemoryOffsetError{32, uint(offset), len(m.data)}
+	}
+
+	copy(m.data[offset:offset+32], []byte{0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0})
+	return nil
+}
+
 // GetCopy returns data starting at given offset and up to offset+size as a new slice
 func (m *Memory) GetCopy(offset, size uint) (dataCopy []byte, err error) {
 	// Check inputs
@@ -67,34 +95,6 @@ func (m *Memory) GetPtr(offset, size uint) ([]byte, error) {
 
 	// Return data starting at the given offset
 	return m.data[offset : offset+size], nil
-}
-
-// Set sets offset + size to value
-func (m *Memory) Set(offset, size uint64, value []byte) error {
-	// Check inputs
-	if size == 0 {
-		return &MemorySizeError{"size is zero"}
-	}
-
-	// Length of store must be at least offset+size
-	if int(offset+size) > len(m.data) {
-		return &MemoryOffsetError{uint(size), uint(offset), len(m.data)}
-	}
-
-	copy(m.data[offset:offset+size], value)
-	return nil
-}
-
-// Set32 sets the 32 bytes starting at offset to the value of val,
-// left-padded with zeroes to 32 bytes
-func (m *Memory) Set32(offset uint64, val *uint256.Int) error {
-	// Length of store must be at least offset+size
-	if int(offset+32) > len(m.data) {
-		return &MemoryOffsetError{32, uint(offset), len(m.data)}
-	}
-
-	copy(m.data[offset:offset+32], []byte{0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0})
-	return nil
 }
 
 // Dump dumps the content of Memory
