@@ -42,6 +42,10 @@ func storeIsInitializedWith(data []byte) error {
 	return godog.ErrPending
 }
 
+func settingOffsetAndSizeTo(arg1, arg2, arg3 string) error {
+	return godog.ErrPending
+}
+
 func dataIsACopy() error {
 	return godog.ErrPending
 }
@@ -84,7 +88,7 @@ func InitializeMemoryScenario(ctx *godog.ScenarioContext) {
 	ctx.Step(`^store is empty$`, storeIsEmpty)
 	ctx.Step(`^updated size is "([^"]*)"$`, updatedSizeIs)
 	ctx.Step(`^store is initialized with "([^"]*)"$`, storeIsInitializedWith)
-
+	ctx.Step(`^Setting offset "([^"]*)" and size "([^"]*)" to "([^"]*)"$`, settingOffsetAndSizeTo)
 }
 
 func TestMemory(t *testing.T) {
