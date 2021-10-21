@@ -6,14 +6,14 @@ Feature: memory
 
   Scenario Outline: resize
     Given a new memory store is created
-    And size is "<oldSize>"
+    And size is "<existingSize>"
     When resized to "<newSize>"
     Then updated size is "<updatedSize>"
     Examples:
-    |oldSize|newSize|updatedSize|
-    | 10    | 20    | 20    |
-    | 10    | 10    | 10    |
-    | 10    | 5     | 10    |
+    |existingSize|newSize|updatedSize|
+    | 10         | 20    | 20    |
+    | 10         | 10    | 10    |
+    | 10         | 5     | 10    |
 
   Scenario Outline: Populate memory with data of a given size starting at a given offset
     Given a new memory store is created
@@ -23,8 +23,8 @@ Feature: memory
     And error is "<error>"
     Examples:
       |data         |offset|size|value   |newdata                     |error             |
-      |A0A1A2A3A4A5 |2     |  0 |        |                            |MemorySizeError   |
-      |A0A1A2A3A4A5 |20    |  10|        |                            |MemoryOffsetError |
+      |A0A1A2A3A4A5 |2     |  0 |        |A0A1A2A3A4A5                |MemorySizeError   |
+      |A0A1A2A3A4A5 |20    |  10|        |A0A1A2A3A4A5                |MemoryOffsetError |
       |A0A1A2A3A4A5 |2     |  2 |B1B2    |A0A1B1B2A2A3A4A5            |                  |
       |A0A1A2A3A4A5 |0     |  3 |B1B2B3B4|B1B2B3A0A1A2A3A4A5A6A7A8A9  |                  |
       |A0A1A2A3A4A5 |5     |  4 |B1B2B3B4|A0A1A2A3A4A5A6A7A8A9B1B2B3B4|                  |
