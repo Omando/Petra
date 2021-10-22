@@ -3,8 +3,10 @@ package vm
 import (
 	"Petra/common"
 	"errors"
+	"fmt"
 	"github.com/cucumber/godog"
 	"github.com/smartystreets/assertions"
+	"reflect"
 	"testing"
 )
 
@@ -52,7 +54,11 @@ func dataShouldBe(expectedData []byte) error {
 }
 
 func errorIs(expectedErrorType string) error {
-	return godog.ErrPending
+	var errType reflect.Type = reflect.TypeOf(memoryError)
+	if errType.String() != expectedErrorType {
+		return fmt.Errorf("expected %s but got %s", expectedErrorType, errType.String())
+	}
+	return nil
 }
 
 func dataIsACopy() error {
