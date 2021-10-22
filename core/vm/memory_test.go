@@ -9,6 +9,7 @@ import (
 )
 
 var memory *Memory
+var memoryError error
 
 func aNewMemoryStoreIsCreated() {
 	memory = NewMemory()
@@ -22,8 +23,8 @@ func storeIsEmpty() error {
 	return nil
 }
 
-func sizeIs(oldSize int) {
-	memory.data = append(memory.data, make([]byte, oldSize)...)
+func sizeIs(existingSize int) {
+	memory.data = append(memory.data, make([]byte, existingSize)...)
 }
 
 func resizedTo(newSize int) {
@@ -38,11 +39,19 @@ func updatedSizeIs(expectedSize int) error {
 	return nil
 }
 
-func storeIsInitializedWith(data []byte) error {
+func storeIsInitializedWith(data []byte) {
 	return godog.ErrPending
 }
 
-func settingOffsetAndSizeTo(arg1, arg2, arg3 string) error {
+func settingOffsetAndSizeTo(offset, size uint64, data []byte) {
+	return godog.ErrPending
+}
+
+func dataShouldBe(expectedData []byte) error {
+	return godog.ErrPending
+}
+
+func errorIs(expectedErrorType string) error {
 	return godog.ErrPending
 }
 
@@ -51,14 +60,6 @@ func dataIsACopy() error {
 }
 
 func dataIsNotACopy() error {
-	return godog.ErrPending
-}
-
-func dataShouldBe(arg1 string) error {
-	return godog.ErrPending
-}
-
-func errorIs(arg1 string) error {
 	return godog.ErrPending
 }
 
