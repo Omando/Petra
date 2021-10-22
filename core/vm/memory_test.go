@@ -47,7 +47,7 @@ func storeIsInitializedWith(data []byte) {
 }
 
 func settingOffsetAndSizeTo(offset, size uint64, data []byte) {
-	return godog.ErrPending
+	memoryError = memory.Set(offset, size, data)
 }
 
 func dataShouldBe(expectedData []byte) error {
