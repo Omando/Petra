@@ -2,6 +2,7 @@ package vm
 
 import (
 	"Petra/common"
+	"bytes"
 	"errors"
 	"fmt"
 	"github.com/cucumber/godog"
@@ -50,7 +51,11 @@ func settingOffsetAndSizeTo(offset, size uint64, data []byte) {
 }
 
 func dataShouldBe(expectedData []byte) error {
-	return godog.ErrPending
+	result := bytes.Equal(memory.Data(), expectedData)
+	if result == false {
+		return errors.New("Not equal")
+	}
+	return nil
 }
 
 func errorIs(expectedErrorType string) error {
