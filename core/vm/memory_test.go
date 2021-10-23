@@ -43,7 +43,7 @@ func updatedSizeIs(expectedSize int) error {
 }
 
 func storeIsInitializedWith(data []byte) {
-	return godog.ErrPending
+	copy(memory.Data(), data)
 }
 
 func settingOffsetAndSizeTo(offset, size uint64, data []byte) {
