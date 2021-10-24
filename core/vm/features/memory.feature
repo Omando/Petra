@@ -15,6 +15,7 @@ Feature: memory
     | 10         | 10    | 10    |
     | 10         | 5     | 10    |
 
+  @run
   Scenario Outline: Populate memory with data of a given size starting at a given offset
     Given a new memory store is created
     And store is initialized with "<data>"
