@@ -43,7 +43,7 @@ func updatedSizeIs(expectedSize int) error {
 }
 
 func storeIsInitializedWith(data []byte) {
-	copy(memory.Data(), data)
+	memory.data = append(memory.data, data...)
 }
 
 func settingOffsetAndSizeTo(offset, size uint64, data []byte) {
