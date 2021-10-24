@@ -104,7 +104,7 @@ func InitializeMemoryScenario(ctx *godog.ScenarioContext) {
 }
 
 func TestMemory(t *testing.T) {
-	suite := common.GetGodogTestSuite("features", "progress", "memory",
+	suite := common.GetGodogTestSuite("features", "progress", "memory", "run",
 		InitializeMemoryScenario, nil)
 
 	if suite.Run() != 0 {
