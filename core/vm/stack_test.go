@@ -137,7 +137,7 @@ func InitializeStackScenario(ctx *godog.ScenarioContext) {
 }
 
 func TestStack(t *testing.T) {
-	suite := common.GetGodogTestSuite("features", "progress", "stack",
+	suite := common.GetGodogTestSuite("features", "progress", "stack", "",
 		InitializeStackScenario, nil)
 
 	if suite.Run() != 0 {
