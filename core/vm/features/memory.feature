@@ -23,12 +23,12 @@ Feature: memory
     Then data should be "<newdata>"
     And error is "<error>"
     Examples:
-      |data         |offset|size|value   |newdata                     |error             |
-      |A0A1A2A3A4A5 |2     |  0 |        |A0A1A2A3A4A5                |MemorySizeError   |
-      |A0A1A2A3A4A5 |20    |  10|        |A0A1A2A3A4A5                |MemoryOffsetError |
-      |A0A1A2A3A4A5 |2     |  2 |B1B2    |A0A1B1B2A2A3A4A5            |                  |
-      |A0A1A2A3A4A5 |0     |  3 |B1B2B3B4|B1B2B3A0A1A2A3A4A5A6A7A8A9  |                  |
-      |A0A1A2A3A4A5 |5     |  4 |B1B2B3B4|A0A1A2A3A4A5A6A7A8A9B1B2B3B4|                  |
+      |data         |offset|size|value   |newdata                     |error                |
+      |A0A1A2A3A4A5 |2     |  0 |        |A0A1A2A3A4A5                |vm.MemorySizeError   |
+      |A0A1A2A3A4A5 |20    |  10|        |A0A1A2A3A4A5                |vm.MemoryOffsetError |
+      |A0A1A2A3A4A5 |2     |  2 |B1B2    |A0A1B1B2A2A3A4A5            |                     |
+      |A0A1A2A3A4A5 |0     |  3 |B1B2B3B4|B1B2B3A0A1A2A3A4A5A6A7A8A9  |                     |
+      |A0A1A2A3A4A5 |5     |  4 |B1B2B3B4|A0A1A2A3A4A5A6A7A8A9B1B2B3B4|                     |
 
     Scenario Outline: Get copy
       Given a new memory store is created
