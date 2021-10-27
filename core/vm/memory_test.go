@@ -46,8 +46,8 @@ func storeIsInitializedWith(data []byte) {
 	memory.data = append(memory.data, data...)
 }
 
-func settingOffsetAndSizeTo(offset, size uint64, data []byte) {
-	memoryError = memory.Set(offset, size, data)
+func settingOffsetAndSizeTo(offset, size int, data []byte) {
+	memoryError = memory.Set(uint64(offset), uint64(size), data)
 }
 
 func dataShouldBe(expectedData []byte) error {
