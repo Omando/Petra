@@ -24,10 +24,10 @@ Feature: memory
     And error is "<error>"
     Examples:
       |data         |offset|size|value |newdata     |error                |
-      |A0A1A2A3A4A5 |2     |  0 |      |A0A1A2A3A4A5|vm.MemorySizeError   |
-      |A0A1A2A3A4A5 |20    |  10|      |A0A1A2A3A4A5|vm.MemoryOffsetError |
-      |A0A1A2A3A4A5 |0     |  4 |QWERTY|QWERA2A3A4A5|                     |
-      |A0A1A2A3A4A5 |2     |  2 |QWERTY|A0A1A2A3A4A5|                     |
+      |A0A1A2A3A4A5 |2     |  0 |      |A0A1A2A3A4A5|*vm.MemorySizeError   |
+      |A0A1A2A3A4A5 |20    |  10|      |A0A1A2A3A4A5|*vm.MemoryOffsetError |
+      |A0A1A2A3A4A5 |0     |  6 |QWERTY|QWERTYA3A4A5|                     |
+      |A0A1A2A3A4A5 |2     |  4 |QWERTY|A0QWERA3A4A5|                     |
       |A0A1A2A3A4A5 |5     |  4 |QWERTY|A0A1AQWER4A5|                     |
 
     Scenario Outline: Get copy
