@@ -60,6 +60,11 @@ func dataShouldBe(expectedData []byte) error {
 
 func errorIs(expectedErrorType string) error {
 	var errType reflect.Type = reflect.TypeOf(memoryError)
+
+	if errType == nil && len(expectedErrorType) == 0 {
+		return nil
+	}
+
 	if errType.String() != expectedErrorType {
 		return fmt.Errorf("expected %s but got %s", expectedErrorType, errType.String())
 	}
