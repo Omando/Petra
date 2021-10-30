@@ -15,7 +15,7 @@ Feature: memory
     | 10         | 10    | 10    |
     | 10         | 5     | 10    |
 
-  @run
+
   Scenario Outline: Populate memory with data of a given size starting at a given offset
     Given a new memory store is created
     And store is initialized with "<data>"
@@ -24,12 +24,13 @@ Feature: memory
     And error is "<error>"
     Examples:
       |data         |offset|size|value |newdata     |error                |
-      |A0A1A2A3A4A5 |2     |  0 |      |A0A1A2A3A4A5|*vm.MemorySizeError   |
-      |A0A1A2A3A4A5 |20    |  10|      |A0A1A2A3A4A5|*vm.MemoryOffsetError |
+      |A0A1A2A3A4A5 |2     |  0 |      |A0A1A2A3A4A5|*vm.MemorySizeError  |
+      |A0A1A2A3A4A5 |20    |  10|      |A0A1A2A3A4A5|*vm.MemoryOffsetError|
       |A0A1A2A3A4A5 |0     |  6 |QWERTY|QWERTYA3A4A5|                     |
       |A0A1A2A3A4A5 |2     |  4 |QWERTY|A0QWERA3A4A5|                     |
       |A0A1A2A3A4A5 |5     |  4 |QWERTY|A0A1AQWER4A5|                     |
 
+    @run
     Scenario Outline: Get copy
       Given a new memory store is created
       And store is initialized with "<data>"
@@ -38,11 +39,11 @@ Feature: memory
       And error is "<error>"
       And data is a copy
       Examples:
-      |data                 |offset|size|copieddata          |error                |
-      |A0A1A2A3A4A5A6A7A8A9 |2     |0   |                    |vm.MemorySizeError   |
-      |A0A1A2A3A4A5A6A7A8A9 |20    |3   |A2A3A4              |vm.MemoryOffsetError |
-      |A0A1A2A3A4A5A6A7A8A9 |2     |3   |A2A3A4              |                     |
-      |A0A1A2A3A4A5A6A7A8A9 |0     |10  |A0A1A2A3A4A5A6A7A8A9|                     |
+      |data                 |offset|size|copieddata          |error                 |
+      |A0A1A2A3A4A5A6A7A8A9 |2     |0   |                    |*vm.MemorySizeError   |
+      |A0A1A2A3A4A5A6A7A8A9 |20    |3   |A2A3A4              |*vm.MemoryOffsetError |
+      |A0A1A2A3A4A5A6A7A8A9 |2     |3   |A2A3A4              |                      |
+      |A0A1A2A3A4A5A6A7A8A9 |0     |10  |A0A1A2A3A4A5A6A7A8A9|                      |
 
   Scenario Outline: Get ptr to data of a given size starting from a given offset
     Given a new memory store is created
@@ -52,8 +53,8 @@ Feature: memory
     And error is "<error>"
     And data is not a copy
     Examples:
-      |data                 |offset|size|copieddata          |error                |
-      |A0A1A2A3A4A5A6A7A8A9 |2     |0   |                    |vm.MemorySizeError   |
-      |A0A1A2A3A4A5A6A7A8A9 |20    |3   |A2A3A4              |vm.MemoryOffsetError |
-      |A0A1A2A3A4A5A6A7A8A9 |2     |3   |A2A3A4              |                     |
-      |A0A1A2A3A4A5A6A7A8A9 |0     |10  |A0A1A2A3A4A5A6A7A8A9|                     |
+      |data                 |offset|size|copieddata          |error                 |
+      |A0A1A2A3A4A5A6A7A8A9 |2     |0   |                    |*vm.MemorySizeError   |
+      |A0A1A2A3A4A5A6A7A8A9 |20    |3   |A2A3A4              |*vm.MemoryOffsetError |
+      |A0A1A2A3A4A5A6A7A8A9 |2     |3   |A2A3A4              |                      |
+      |A0A1A2A3A4A5A6A7A8A9 |0     |10  |A0A1A2A3A4A5A6A7A8A9|                      |
