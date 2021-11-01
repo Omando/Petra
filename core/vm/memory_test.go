@@ -13,6 +13,7 @@ import (
 
 var memory *Memory
 var memoryError error
+var dataCopy []byte
 
 func aNewMemoryStoreIsCreated() {
 	memory = NewMemory()
@@ -50,6 +51,10 @@ func settingOffsetAndSizeTo(offset, size int, data []byte) {
 	memoryError = memory.Set(uint64(offset), uint64(size), data)
 }
 
+func gettingACopyAtOffsetAndSize(offset, size uint) {
+	dataCopy, memoryError = memory.GetCopy(offset, size)
+}
+
 func dataShouldBe(expectedData []byte) error {
 	result := bytes.Equal(memory.Data(), expectedData)
 	if result == false {
@@ -59,12 +64,16 @@ func dataShouldBe(expectedData []byte) error {
 }
 
 func errorIs(expectedErrorType string) error {
+	// Get type of error reported by last operation
 	var errType reflect.Type = reflect.TypeOf(memoryError)
 
+	/* Check if error reported by last operation matched expectation */
+	// No error should been generated
 	if errType == nil && len(expectedErrorType) == 0 {
 		return nil
 	}
 
+	// Does last error match our expectation?
 	if errType.String() != expectedErrorType {
 		return fmt.Errorf("expected %s but got %s", expectedErrorType, errType.String())
 	}
@@ -76,10 +85,6 @@ func dataIsACopy() error {
 }
 
 func dataIsNotACopy() error {
-	return godog.ErrPending
-}
-
-func gettingACopyAtOffsetAndSize(arg1, arg2 string) error {
 	return godog.ErrPending
 }
 
