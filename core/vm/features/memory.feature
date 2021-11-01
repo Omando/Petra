@@ -39,11 +39,11 @@ Feature: memory
       And error is "<error>"
       And data is a copy
       Examples:
-      |data                 |offset|size|copieddata          |error                 |
-      |A0A1A2A3A4A5A6A7A8A9 |2     |0   |                    |*vm.MemorySizeError   |
-      |A0A1A2A3A4A5A6A7A8A9 |20    |3   |A2A3A4              |*vm.MemoryOffsetError |
-      |A0A1A2A3A4A5A6A7A8A9 |2     |3   |A2A3A4              |                      |
-      |A0A1A2A3A4A5A6A7A8A9 |0     |10  |A0A1A2A3A4A5A6A7A8A9|                      |
+      |data                 |offset|size|copieddata  |error                 |
+      |A0A1A2A3A4A5A6A7A8A9 |2     |0   |            |*vm.MemorySizeError   |
+      |A0A1A2A3A4A5A6A7A8A9 |20    |3   |            |*vm.MemoryOffsetError |
+      |A0A1A2A3A4A5A6A7A8A9 |2     |6   |A1A2A3      |                      |
+      |A0A1A2A3A4A5A6A7A8A9 |0     |10  |A0A1A2A3A4  |                      |
 
   Scenario Outline: Get ptr to data of a given size starting from a given offset
     Given a new memory store is created
