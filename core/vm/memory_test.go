@@ -63,6 +63,10 @@ func dataShouldBe(expectedData []byte) error {
 	return nil
 }
 
+func copiedDataShouldBe(expectedData []byte) error {
+	return godog.ErrPending
+}
+
 func errorIs(expectedErrorType string) error {
 	// Get type of error reported by last operation
 	var errType reflect.Type = reflect.TypeOf(memoryError)
@@ -101,6 +105,7 @@ func InitializeMemoryScenario(ctx *godog.ScenarioContext) {
 	ctx.Step(`^data is a copy$`, dataIsACopy)
 	ctx.Step(`^data is not a copy$`, dataIsNotACopy)
 	ctx.Step(`^data should be "([^"]*)"$`, dataShouldBe)
+	ctx.Step(`^copied data should be "([^"]*)"$`, copiedDataShouldBe)
 	ctx.Step(`^error is "([^"]*)"$`, errorIs)
 	ctx.Step(`^getting a copy at offset "([^"]*)" and size "([^"]*)"$`, gettingACopyAtOffsetAndSize)
 	ctx.Step(`^getting a ptr at offset "([^"]*)" and size "([^"]*)"$`, gettingAPtrAtOffsetAndSize)
