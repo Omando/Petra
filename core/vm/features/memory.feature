@@ -35,7 +35,7 @@ Feature: memory
       Given a new memory store is created
       And store is initialized with "<data>"
       When getting a copy at offset "<offset>" and size "<size>"
-      Then data should be "<copieddata>"
+      Then copied data should be "<copieddata>"
       And error is "<error>"
       And data is a copy
       Examples:
