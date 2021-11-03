@@ -64,7 +64,11 @@ func dataShouldBe(expectedData []byte) error {
 }
 
 func copiedDataShouldBe(expectedData []byte) error {
-	return godog.ErrPending
+	result := bytes.Equal(dataCopy, expectedData)
+	if result == false {
+		return errors.New("Not equal")
+	}
+	return nil
 }
 
 func errorIs(expectedErrorType string) error {
