@@ -30,7 +30,6 @@ Feature: memory
       |A0A1A2A3A4A5 |2     |  4 |QWERTY|A0QWERA3A4A5|                     |
       |A0A1A2A3A4A5 |5     |  4 |QWERTY|A0A1AQWER4A5|                     |
 
-    @run
     Scenario Outline: Get copy
       Given a new memory store is created
       And store is initialized with "<data>"
@@ -45,11 +44,12 @@ Feature: memory
       |A0A1A2A3A4A5A6A7A8A9 |2     |6   |A1A2A3      |                      |
       |A0A1A2A3A4A5A6A7A8A9 |0     |10  |A0A1A2A3A4  |                      |
 
+  @run
   Scenario Outline: Get ptr to data of a given size starting from a given offset
     Given a new memory store is created
     And store is initialized with "<data>"
     When getting a ptr at offset "<offset>" and size "<size>"
-    Then data should be "<copieddata>"
+    Then getptr data should be "<copieddata>"
     And error is "<error>"
     And data is not a copy
     Examples:
