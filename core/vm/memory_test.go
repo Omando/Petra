@@ -109,11 +109,19 @@ func gettingAPtrAtOffsetAndSize(offset, size int) {
 }
 
 func dataIsNotACopy() error {
-	return godog.ErrPending
-}
+	// Ignore this operation memory copy is nil
+	if dataCopy == nil {
+		return nil
+	}
 
-func settingStartingAtAndSize(arg1, arg2, arg3 string) error {
-	return godog.ErrPending
+	// We did get data. Compare if the slices refer to the same underlying array
+	var addr1 uintptr = reflect.ValueOf(dataCopy).Pointer()
+	var addr2 uintptr = reflect.ValueOf(memory.data).Pointer()
+
+	if addr1 != addr2 {
+		return errors.New("copied data points to the same underlying array as memory")
+	}
+	return nil
 }
 
 func InitializeMemoryScenario(ctx *godog.ScenarioContext) {
@@ -126,7 +134,6 @@ func InitializeMemoryScenario(ctx *godog.ScenarioContext) {
 	ctx.Step(`^getting a copy at offset "([^"]*)" and size "([^"]*)"$`, gettingACopyAtOffsetAndSize)
 	ctx.Step(`^getting a ptr at offset "([^"]*)" and size "([^"]*)"$`, gettingAPtrAtOffsetAndSize)
 	ctx.Step(`^resized to "([^"]*)"$`, resizedTo)
-	ctx.Step(`^setting "([^"]*)" starting at "([^"]*)" and size "([^"]*)"$`, settingStartingAtAndSize)
 	ctx.Step(`^size is "([^"]*)"$`, sizeIs)
 	ctx.Step(`^store is empty$`, storeIsEmpty)
 	ctx.Step(`^updated size is "([^"]*)"$`, updatedSizeIs)
