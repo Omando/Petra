@@ -51,8 +51,8 @@ func settingOffsetAndSizeTo(offset, size int, data []byte) {
 	memoryError = memory.Set(uint64(offset), uint64(size), data)
 }
 
-func gettingACopyAtOffsetAndSize(offset, size uint) {
-	dataCopy, memoryError = memory.GetCopy(offset, size)
+func gettingACopyAtOffsetAndSize(offset, size int) {
+	dataCopy, memoryError = memory.GetCopy(uint(offset), uint(size))
 }
 
 func dataShouldBe(expectedData []byte) error {
@@ -89,7 +89,19 @@ func errorIs(expectedErrorType string) error {
 }
 
 func dataIsACopy() error {
-	return godog.ErrPending
+	// Ignore this operation memory copy is nil
+	if dataCopy == nil {
+		return nil
+	}
+
+	// We did get data. Compare if the slices refer to the same underlying array
+	var addr1 uintptr = reflect.ValueOf(dataCopy).Pointer()
+	var addr2 uintptr = reflect.ValueOf(memory.data).Pointer()
+
+	if addr1 == addr2 {
+		return errors.New("copied data points to the same underlying array as memory")
+	}
+	return nil
 }
 
 func dataIsNotACopy() error {
