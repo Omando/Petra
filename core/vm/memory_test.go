@@ -108,6 +108,10 @@ func gettingAPtrAtOffsetAndSize(offset, size int) {
 	dataCopy, memoryError = memory.GetPtr(uint(offset), uint(size))
 }
 
+func getptrDataShouldBe(arg1 string) error {
+	return godog.ErrPending
+}
+
 func dataIsNotACopy() error {
 	// Ignore this operation memory copy is nil
 	if dataCopy == nil {
@@ -130,6 +134,7 @@ func InitializeMemoryScenario(ctx *godog.ScenarioContext) {
 	ctx.Step(`^data is not a copy$`, dataIsNotACopy)
 	ctx.Step(`^data should be "([^"]*)"$`, dataShouldBe)
 	ctx.Step(`^copied data should be "([^"]*)"$`, copiedDataShouldBe)
+	ctx.Step(`^getptr data should be "([^"]*)"$`, getptrDataShouldBe)
 	ctx.Step(`^error is "([^"]*)"$`, errorIs)
 	ctx.Step(`^getting a copy at offset "([^"]*)" and size "([^"]*)"$`, gettingACopyAtOffsetAndSize)
 	ctx.Step(`^getting a ptr at offset "([^"]*)" and size "([^"]*)"$`, gettingAPtrAtOffsetAndSize)
