@@ -104,11 +104,11 @@ func dataIsACopy() error {
 	return nil
 }
 
-func dataIsNotACopy() error {
-	return godog.ErrPending
+func gettingAPtrAtOffsetAndSize(offset, size int) {
+	dataCopy, memoryError = memory.GetPtr(uint(offset), uint(size))
 }
 
-func gettingAPtrAtOffsetAndSize(arg1, arg2 string) error {
+func dataIsNotACopy() error {
 	return godog.ErrPending
 }
 
