@@ -108,8 +108,12 @@ func gettingAPtrAtOffsetAndSize(offset, size int) {
 	dataCopy, memoryError = memory.GetPtr(uint(offset), uint(size))
 }
 
-func getptrDataShouldBe(arg1 string) error {
-	return godog.ErrPending
+func getptrDataShouldBe(expectedData []byte) error {
+	result := bytes.Equal(dataCopy, expectedData)
+	if result == false {
+		return errors.New("Not equal")
+	}
+	return nil
 }
 
 func dataIsNotACopy() error {
