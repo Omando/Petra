@@ -41,8 +41,8 @@ Feature: memory
       |data                 |offset|size|copieddata  |error                 |
       |A0A1A2A3A4A5A6A7A8A9 |2     |0   |            |*vm.MemorySizeError   |
       |A0A1A2A3A4A5A6A7A8A9 |20    |3   |            |*vm.MemoryOffsetError |
-      |A0A1A2A3A4A5A6A7A8A9 |2     |6   |A1A2A3      |                      |
       |A0A1A2A3A4A5A6A7A8A9 |0     |10  |A0A1A2A3A4  |                      |
+      |A0A1A2A3A4A5A6A7A8A9 |2     |6   |A1A2A3      |                      |
 
   @run
   Scenario Outline: Get ptr to data of a given size starting from a given offset
@@ -56,5 +56,5 @@ Feature: memory
       |data                 |offset|size|copieddata  |error                |
       |A0A1A2A3A4A5A6A7A8A9 |2     |0   |            |*vm.MemorySizeError  |
       |A0A1A2A3A4A5A6A7A8A9 |20    |3   |            |*vm.MemoryOffsetError|
-      |A0A1A2A3A4A5A6A7A8A9 |2     |6   |A1A2A3      |                     |
       |A0A1A2A3A4A5A6A7A8A9 |0     |10  |A0A1A2A3A4  |                     |
+      |A0A1A2A3A4A5A6A7A8A9 |2     |6   |A1A2A3      |                     |
