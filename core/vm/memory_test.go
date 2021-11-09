@@ -14,6 +14,7 @@ import (
 var memory *Memory
 var memoryError error
 var dataCopy []byte
+var dataOffset, dataSize int
 
 func aNewMemoryStoreIsCreated() {
 	memory = NewMemory()
@@ -51,20 +52,8 @@ func settingOffsetAndSizeTo(offset, size int, data []byte) {
 	memoryError = memory.Set(uint64(offset), uint64(size), data)
 }
 
-func gettingACopyAtOffsetAndSize(offset, size int) {
-	dataCopy, memoryError = memory.GetCopy(uint(offset), uint(size))
-}
-
 func dataShouldBe(expectedData []byte) error {
 	result := bytes.Equal(memory.Data(), expectedData)
-	if result == false {
-		return errors.New("Not equal")
-	}
-	return nil
-}
-
-func copiedDataShouldBe(expectedData []byte) error {
-	result := bytes.Equal(dataCopy, expectedData)
 	if result == false {
 		return errors.New("Not equal")
 	}
@@ -95,23 +84,11 @@ func dataIsACopy() error {
 	}
 
 	// We did get data. Compare if the slices refer to the same underlying array
-	var addr1 uintptr = reflect.ValueOf(dataCopy).Pointer()
-	var addr2 uintptr = reflect.ValueOf(memory.data).Pointer()
+	var addr1 *byte = &dataCopy[0]
+	var addr2 *byte = &memory.data[dataOffset]
 
 	if addr1 == addr2 {
 		return errors.New("copied data points to the same underlying array as memory")
-	}
-	return nil
-}
-
-func gettingAPtrAtOffsetAndSize(offset, size int) {
-	dataCopy, memoryError = memory.GetPtr(uint(offset), uint(size))
-}
-
-func getptrDataShouldBe(expectedData []byte) error {
-	result := bytes.Equal(dataCopy, expectedData)
-	if result == false {
-		return errors.New("Not equal")
 	}
 	return nil
 }
@@ -123,11 +100,11 @@ func dataIsNotACopy() error {
 	}
 
 	// We did get data. Compare if the slices refer to the same underlying array
-	var addr1 uintptr = reflect.ValueOf(dataCopy).Pointer()
-	var addr2 uintptr = reflect.ValueOf(memory.data).Pointer()
+	var addr1 *byte = &dataCopy[0]
+	var addr2 *byte = &memory.data[dataOffset]
 
 	if addr1 != addr2 {
-		return errors.New("copied data points to the same underlying array as memory")
+		return errors.New("getptr data does not point to the same underlying array as memory")
 	}
 	return nil
 }
