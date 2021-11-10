@@ -60,6 +60,12 @@ func dataShouldBe(expectedData []byte) error {
 	return nil
 }
 
+func gettingACopyAtOffsetAndSize(offset, size int) {
+	dataOffset = offset
+	dataSize = size
+	dataCopy, memoryError = memory.GetCopy(uint(offset), uint(size))
+}
+
 func errorIs(expectedErrorType string) error {
 	// Get type of error reported by last operation
 	var errType reflect.Type = reflect.TypeOf(memoryError)
