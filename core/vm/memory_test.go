@@ -66,6 +66,20 @@ func gettingACopyAtOffsetAndSize(offset, size int) {
 	dataCopy, memoryError = memory.GetCopy(uint(offset), uint(size))
 }
 
+func gettingAPtrAtOffsetAndSize(offset, size int) {
+	dataOffset = offset
+	dataSize = size
+	dataCopy, memoryError = memory.GetPtr(uint(offset), uint(size))
+}
+
+func getptrDataShouldBe(expectedData []byte) error {
+	result := bytes.Equal(dataCopy, expectedData)
+	if result == false {
+		return errors.New("Not equal")
+	}
+	return nil
+}
+
 func errorIs(expectedErrorType string) error {
 	// Get type of error reported by last operation
 	var errType reflect.Type = reflect.TypeOf(memoryError)
