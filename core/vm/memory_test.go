@@ -72,6 +72,14 @@ func gettingAPtrAtOffsetAndSize(offset, size int) {
 	dataCopy, memoryError = memory.GetPtr(uint(offset), uint(size))
 }
 
+func copiedDataShouldBe(expectedData []byte) error {
+	result := bytes.Equal(dataCopy, expectedData)
+	if result == false {
+		return errors.New("Not equal")
+	}
+	return nil
+}
+
 func getptrDataShouldBe(expectedData []byte) error {
 	result := bytes.Equal(dataCopy, expectedData)
 	if result == false {
