@@ -59,12 +59,12 @@ func (stack *Stack) pop() (ret uint256.Int, err error) {
 }
 
 // peek retrieves but does not remove the item at the top of the stack
-func (stack *Stack) peek() (uint256.Int, error) {
+func (stack *Stack) peek() (*uint256.Int, error) {
 	if stack.isEmpty() {
-		return uint256.Int{}, errors.New("stack is empty")
+		return &uint256.Int{}, errors.New("stack is empty")
 	}
 
-	return stack.data[len(stack.data)-1], nil
+	return &stack.data[len(stack.data)-1], nil
 }
 
 func (stack *Stack) peekN(n int) (uint256.Int, error) {
