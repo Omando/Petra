@@ -1,6 +1,6 @@
 package vm
 
-func opAdd(pc *uint64, interpreter *EVMInterpreter, scope *CallContext) ([]byte, error) {
+func opAdd(pc *uint64, interpreter *VMInterpreter, scope *CallContext) ([]byte, error) {
 	x, xerr := scope.Stack.pop()
 	if xerr != nil {
 		return nil, xerr
@@ -15,7 +15,7 @@ func opAdd(pc *uint64, interpreter *EVMInterpreter, scope *CallContext) ([]byte,
 	return nil, nil
 }
 
-func opSub(pc *uint64, interpreter *EVMInterpreter, scope *CallContext) ([]byte, error) {
+func opSub(pc *uint64, interpreter *VMInterpreter, scope *CallContext) ([]byte, error) {
 	x, xerr := scope.Stack.pop()
 	if xerr != nil {
 		return nil, xerr
@@ -30,7 +30,7 @@ func opSub(pc *uint64, interpreter *EVMInterpreter, scope *CallContext) ([]byte,
 	return nil, nil
 }
 
-func opMul(pc *uint64, interpreter *EVMInterpreter, scope *CallContext) ([]byte, error) {
+func opMul(pc *uint64, interpreter *VMInterpreter, scope *CallContext) ([]byte, error) {
 	x, xerr := scope.Stack.pop()
 	if xerr != nil {
 		return nil, xerr
@@ -45,7 +45,7 @@ func opMul(pc *uint64, interpreter *EVMInterpreter, scope *CallContext) ([]byte,
 	return nil, nil
 }
 
-func opDiv(pc *uint64, interpreter *EVMInterpreter, scope *CallContext) ([]byte, error) {
+func opDiv(pc *uint64, interpreter *VMInterpreter, scope *CallContext) ([]byte, error) {
 	x, xerr := scope.Stack.pop()
 	if xerr != nil {
 		return nil, xerr
