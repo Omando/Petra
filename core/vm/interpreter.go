@@ -6,5 +6,5 @@ type CallContext struct {
 	Contract *Contract
 }
 
-type EVMInterpreter struct {
+type VMInterpreter struct {
 }
