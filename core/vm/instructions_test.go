@@ -1,21 +1,27 @@
 package vm
 
-import "github.com/cucumber/godog"
+import (
+	"github.com/cucumber/godog"
+	"github.com/holiman/uint256"
+)
+
+var operand1 uint256.Int
+var operand2 uint256.Int
 
 func addIsCalled() error {
 	return godog.ErrPending
 }
 
-func resultIsSum() error {
+func and(arg1, arg2 string) error {
 	return godog.ErrPending
 }
 
-func xAndY() error {
+func resultIs(arg1 string) error {
 	return godog.ErrPending
 }
 
 func InitializeScenario(ctx *godog.ScenarioContext) {
 	ctx.Step(`^Add is called$`, addIsCalled)
-	ctx.Step(`^result is sum$`, resultIsSum)
-	ctx.Step(`^x and y$`, xAndY)
+	ctx.Step(`^"([^"]*)" and "([^"]*)"$`, and)
+	ctx.Step(`^result is "([^"]*)"$`, resultIs)
 }
