@@ -1,9 +1,9 @@
 Feature: Instructions
 
   Scenario Outline: Add
-    Given x and y
+    Given "<x>" and "<y>"
     When Add is called
-    Then result is sum
+    Then result is "<sum>"
     Examples:
     |x   |y   |sum  |
     |1   |2   |3    |
