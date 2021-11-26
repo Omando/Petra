@@ -12,7 +12,7 @@ func addIsCalled() error {
 	return godog.ErrPending
 }
 
-func and(arg1, arg2 string) error {
+func addOperands(arg1, arg2 string) error {
 	return godog.ErrPending
 }
 
@@ -22,6 +22,6 @@ func resultIs(arg1 string) error {
 
 func InitializeScenario(ctx *godog.ScenarioContext) {
 	ctx.Step(`^Add is called$`, addIsCalled)
-	ctx.Step(`^"([^"]*)" and "([^"]*)"$`, and)
+	ctx.Step(`^"([^"]*)" and "([^"]*)" operands$`, addOperands)
 	ctx.Step(`^result is "([^"]*)"$`, resultIs)
 }
