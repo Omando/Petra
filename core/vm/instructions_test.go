@@ -2,6 +2,8 @@ package vm
 
 import (
 	"Petra/common"
+	"errors"
+	"fmt"
 	"github.com/cucumber/godog"
 	"github.com/holiman/uint256"
 )
@@ -17,7 +19,16 @@ func stringToUint256(hexValue string) (uint256.Int, error) {
 }
 
 func addOperands(x, y string) error {
+	var err error
+	operand1, err = stringToUint256(x)
+	if err != nil {
+		return errors.New(fmt.Sprint("Could not convert %s to uint256.int", x))
+	}
 
+	operand2, err = stringToUint256(y)
+	if err != nil {
+		return errors.New(fmt.Sprint("Could not convert %s to uint256.int", y))
+	}
 }
 
 func addIsCalled() error {
