@@ -12,10 +12,15 @@ var operand1 uint256.Int
 var operand2 uint256.Int
 
 func stringToUint256(hexValue string) (uint256.Int, error) {
+	// Convert a hex string to byte[]
 	bytes, err := common.FromHex(hexValue)
 	if err != nil {
 		return uint256.Int{}, err
 	}
+
+	result := uint256.Int{}
+	result.SetBytes(bytes)
+	return result, nil
 }
 
 func addOperands(x, y string) error {
