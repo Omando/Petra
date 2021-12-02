@@ -35,6 +35,22 @@ To run all features in a specific features folder
 godog .\features
 ```
 
+To debug a features test, add the following to the test file
+```go
+func TestMemory(t *testing.T) {
+	suite := common.GetGodogTestSuite(
+		"features",                 // path to features folder 
+		"progress",                 // godog formatter name 
+		"memory",                   // suite name
+		"run",                      // tag name (scenarios without this tag will not run)
+		InitializeMemoryScenario,   // function used to setup godog steps 
+		nil)
+
+	if suite.Run() != 0 {
+		t.Fatal("Failed to run memory feature test")
+	}
+}
+```
 ## Technical Notes
 
 ## Links
