@@ -1,5 +1,6 @@
 Feature: Instructions
 
+  @run
   Scenario Outline: Add
     Given "<x>" and "<y>" operands
     When Add is called
