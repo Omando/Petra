@@ -6,6 +6,7 @@ import (
 	"fmt"
 	"github.com/cucumber/godog"
 	"github.com/holiman/uint256"
+	"testing"
 )
 
 var operand1 uint256.Int
@@ -50,4 +51,18 @@ func InitializeInstructionsScenario(ctx *godog.ScenarioContext) {
 	ctx.Step(`^Add is called$`, addIsCalled)
 	ctx.Step(`^"([^"]*)" and "([^"]*)" operands$`, addOperands)
 	ctx.Step(`^result is "([^"]*)"$`, resultIs)
+}
+
+func TestInstructions(t *testing.T) {
+	suite := common.GetGodogTestSuite(
+		"features",               // path to features folder
+		"progress",               // godog formatter name
+		"instructions",           // suite name
+		"run",                    // tag name (scenarios without this tag will not run)
+		InitializeMemoryScenario, // function used to setup godog steps
+		nil)
+
+	if suite.Run() != 0 {
+		t.Fatal("Failed to run memory feature test")
+	}
 }
