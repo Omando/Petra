@@ -34,6 +34,8 @@ func addOperands(x, y string) error {
 	if err != nil {
 		return errors.New(fmt.Sprint("Could not convert %s to uint256.int", y))
 	}
+
+	return nil
 }
 
 func addIsCalled() error {
@@ -44,7 +46,7 @@ func resultIs(arg1 string) error {
 	return godog.ErrPending
 }
 
-func InitializeScenario(ctx *godog.ScenarioContext) {
+func InitializeInstructionsScenario(ctx *godog.ScenarioContext) {
 	ctx.Step(`^Add is called$`, addIsCalled)
 	ctx.Step(`^"([^"]*)" and "([^"]*)" operands$`, addOperands)
 	ctx.Step(`^result is "([^"]*)"$`, resultIs)
