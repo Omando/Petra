@@ -6,6 +6,6 @@ Feature: Instructions
     When Add is called
     Then result is "<sum>"
     Examples:
-    |x   |y   |sum  |
-    |1   |2   |3    |
-    |aaaa|bbbb|16665|
+    |x    |y    |sum  |
+    |01   |02   |3    |
+    |aaaa |bbbb |16665|
