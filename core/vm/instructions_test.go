@@ -28,12 +28,12 @@ func addOperands(x, y string) error {
 	var err error
 	operand1, err = stringToUint256(x)
 	if err != nil {
-		return errors.New(fmt.Sprint("Could not convert %s to uint256.int", x))
+		return errors.New(fmt.Sprintf("Could not convert %s to uint256.int", x))
 	}
 
 	operand2, err = stringToUint256(y)
 	if err != nil {
-		return errors.New(fmt.Sprint("Could not convert %s to uint256.int", y))
+		return errors.New(fmt.Sprintf("Could not convert %s to uint256.int", y))
 	}
 
 	return nil
@@ -55,11 +55,11 @@ func InitializeInstructionsScenario(ctx *godog.ScenarioContext) {
 
 func TestInstructions(t *testing.T) {
 	suite := common.GetGodogTestSuite(
-		"features",               // path to features folder
-		"progress",               // godog formatter name
-		"instructions",           // suite name
-		"run",                    // tag name (scenarios without this tag will not run)
-		InitializeMemoryScenario, // function used to setup godog steps
+		"features",                     // path to features folder
+		"progress",                     // godog formatter name
+		"instructions",                 // suite name
+		"run",                          // tag name (scenarios without this tag will not run)
+		InitializeInstructionsScenario, // function used to setup godog steps
 		nil)
 
 	if suite.Run() != 0 {
